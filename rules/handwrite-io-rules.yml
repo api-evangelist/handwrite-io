@@ -1,0 +1,9 @@
+extends:
+  - spectral:oas
+rules:
+  operation-tags: warn
+  operation-description: warn
+  operation-operationId: error
+  info-contact: warn
+  info-description: error
+  no-$ref-siblings: error

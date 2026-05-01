@@ -14,7 +14,7 @@ tags:
   - Marketing
   - Notes
 created: '2024-11-14'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 apis:
   - aid: handwrite-io:handwrite-io
@@ -24,7 +24,7 @@ apis:
       manner using REST endpoints. Integrate personalized handwritten
       correspondence into your workflows and applications.
     humanURL: https://documentation.handwrite.io/#introduction
-    baseURL: https://handwrite.io/api
+    baseURL: https://api.handwrite.io/v1
     tags:
       - Handwritten
       - Notes
@@ -33,6 +33,12 @@ apis:
         url: https://documentation.handwrite.io/#introduction
       - type: Authentication
         url: https://documentation.handwrite.io/#authentication
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/openapi/handwrite-io-openapi.yml
+      - type: Rules
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 common:
   - type: Website
     url: https://handwrite.io/
