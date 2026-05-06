@@ -1,0 +1,177 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Handwrite IO API
+  description: The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate
+    personalized handwritten correspondence into your workflows and applications at scale.
+  tags:
+  - Handwrite
+  - Io
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: handwrite-io
+    baseUri: https://api.handwrite.io/v1
+    description: Handwrite IO API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{HANDWRITE_IO_TOKEN}}'
+    resources:
+    - name: handwriting
+      path: /handwriting
+      operations:
+      - name: gethandwritings
+        method: GET
+        description: Get Handwritings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: stationery
+      path: /stationery
+      operations:
+      - name: getstationery
+        method: GET
+        description: Get Stationery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: send
+      path: /send
+      operations:
+      - name: sendletter
+        method: POST
+        description: Send a Letter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: order-orderid
+      path: /order/{orderId}
+      operations:
+      - name: getorder
+        method: GET
+        description: Get an Order
+        inputParameters:
+        - name: orderId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: handwrite-io-rest
+    description: REST adapter for Handwrite IO API.
+    resources:
+    - path: /handwriting
+      name: gethandwritings
+      operations:
+      - method: GET
+        name: gethandwritings
+        description: Get Handwritings
+        call: handwrite-io.gethandwritings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /stationery
+      name: getstationery
+      operations:
+      - method: GET
+        name: getstationery
+        description: Get Stationery
+        call: handwrite-io.getstationery
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /send
+      name: sendletter
+      operations:
+      - method: POST
+        name: sendletter
+        description: Send a Letter
+        call: handwrite-io.sendletter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /order/{orderId}
+      name: getorder
+      operations:
+      - method: GET
+        name: getorder
+        description: Get an Order
+        call: handwrite-io.getorder
+        with:
+          orderId: rest.orderId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: handwrite-io-mcp
+    transport: http
+    description: MCP adapter for Handwrite IO API for AI agent use.
+    tools:
+    - name: gethandwritings
+      description: Get Handwritings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: handwrite-io.gethandwritings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getstationery
+      description: Get Stationery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: handwrite-io.getstationery
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sendletter
+      description: Send a Letter
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: handwrite-io.sendletter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getorder
+      description: Get an Order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: handwrite-io.getorder
+      with:
+        orderId: tools.orderId
+      inputParameters:
+      - name: orderId
+        type: string
+        description: orderId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    HANDWRITE_IO_TOKEN: HANDWRITE_IO_TOKEN
