@@ -44,6 +44,10 @@ common:
     url: https://handwrite.io/
   - type: Documentation
     url: https://documentation.handwrite.io/
+  - type: Integrations
+    url: https://www.handwrite.io/integrations
+integrations:
+  - name: Handwrite
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
