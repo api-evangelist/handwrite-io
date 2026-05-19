@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Handwrite IO API — Stationery
+  description: 'Handwrite IO API — Stationery. 1 operations. Lead operation: Get Stationery. Self-contained Naftiko capability
+    covering one Handwrite Io business surface.'
+  tags:
+  - Handwrite Io
+  - Stationery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HANDWRITE_IO_API_KEY: HANDWRITE_IO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: handwrite-io-stationery
+    baseUri: https://api.handwrite.io/v1
+    description: Handwrite IO API — Stationery business capability. Self-contained, no shared references.
+    resources:
+    - name: stationery
+      path: /stationery
+      operations:
+      - name: getstationery
+        method: GET
+        description: Get Stationery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.HANDWRITE_IO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: handwrite-io-stationery-rest
+    port: 8080
+    description: REST adapter for Handwrite IO API — Stationery. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/stationery
+      name: stationery
+      description: REST surface for stationery.
+      operations:
+      - method: GET
+        name: getstationery
+        description: Get Stationery
+        call: handwrite-io-stationery.getstationery
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: handwrite-io-stationery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Handwrite IO API — Stationery. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-stationery
+      description: Get Stationery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: handwrite-io-stationery.getstationery
+      outputParameters:
+      - type: object
+        mapping: $.

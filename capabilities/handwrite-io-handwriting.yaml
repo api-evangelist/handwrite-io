@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Handwrite IO API — Handwriting
+  description: 'Handwrite IO API — Handwriting. 1 operations. Lead operation: Get Handwritings. Self-contained Naftiko capability
+    covering one Handwrite Io business surface.'
+  tags:
+  - Handwrite Io
+  - Handwriting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HANDWRITE_IO_API_KEY: HANDWRITE_IO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: handwrite-io-handwriting
+    baseUri: https://api.handwrite.io/v1
+    description: Handwrite IO API — Handwriting business capability. Self-contained, no shared references.
+    resources:
+    - name: handwriting
+      path: /handwriting
+      operations:
+      - name: gethandwritings
+        method: GET
+        description: Get Handwritings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.HANDWRITE_IO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: handwrite-io-handwriting-rest
+    port: 8080
+    description: REST adapter for Handwrite IO API — Handwriting. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/handwriting
+      name: handwriting
+      description: REST surface for handwriting.
+      operations:
+      - method: GET
+        name: gethandwritings
+        description: Get Handwritings
+        call: handwrite-io-handwriting.gethandwritings
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: handwrite-io-handwriting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Handwrite IO API — Handwriting. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-handwritings
+      description: Get Handwritings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: handwrite-io-handwriting.gethandwritings
+      outputParameters:
+      - type: object
+        mapping: $.
