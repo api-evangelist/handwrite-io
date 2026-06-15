@@ -1,0 +1,670 @@
+{
+  "item": [
+    {
+      "id": "e690a8fd-8966-42be-803c-e8e6312028b8",
+      "name": "Handwriting",
+      "description": {
+        "content": "Available handwriting styles",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a27e937e-33e1-4bb8-a48e-76cf4acfdb15",
+          "name": "Get Handwritings",
+          "request": {
+            "name": "Get Handwritings",
+            "description": {
+              "content": "Returns a list of available handwriting styles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "handwriting"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a71f34f-b2e7-4da5-8507-7f17d2d2d9c6",
+              "name": "Array of handwriting objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "handwriting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://bDlB.gnoObXZrrAtztdYRKRAku5XKtbcjj04S+BTDvvG,6urssu99qaJ\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://eqqy.dsmsp2jF4c7nhcfK2ZuifEHIlhUb\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a858be6-51ca-42d9-af09-4811b9fd2524",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "handwriting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d74dacd4-5db5-4f9a-9294-f800157ae9ed",
+      "name": "Stationery",
+      "description": {
+        "content": "Available stationery and cards",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2cf3b9f-8e83-4b5e-9676-045d3d23c866",
+          "name": "Get Stationery",
+          "request": {
+            "name": "Get Stationery",
+            "description": {
+              "content": "Returns a list of available stationery and card options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stationery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55570e58-ec49-49c8-be96-095fe4f40b03",
+              "name": "Array of stationery objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stationery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://bDlB.gnoObXZrrAtztdYRKRAku5XKtbcjj04S+BTDvvG,6urssu99qaJ\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://eqqy.dsmsp2jF4c7nhcfK2ZuifEHIlhUb\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bccd372-62d1-43c7-a65a-c488f0c304a2",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stationery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "94af798e-926c-4e23-affe-1d497cf89fad",
+      "name": "Send",
+      "description": {
+        "content": "Send handwritten notes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0fcb2ffd-d96d-4325-9055-bc4914bff7c5",
+          "name": "Send a Letter",
+          "request": {
+            "name": "Send a Letter",
+            "description": {
+              "content": "Sends one or more handwritten letters. Accepts a single order or a batch (up to 1,000 individual orders per request).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d5d561f-bda3-4e34-aa71-6f0992a0e064",
+              "name": "Array of order objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"status\": \"problem\",\n    \"message\": \"string\",\n    \"handwriting\": \"string\",\n    \"card\": \"string\",\n    \"recipient\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"from\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"proof_url\": \"http://LJqjuofxiwfgC.aatSQ027VJ\",\n    \"created_at\": \"1995-08-17T06:09:23.306Z\"\n  },\n  {\n    \"_id\": \"string\",\n    \"status\": \"written\",\n    \"message\": \"string\",\n    \"handwriting\": \"string\",\n    \"card\": \"string\",\n    \"recipient\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"from\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"proof_url\": \"https://cEUccsIusZW.jwtw6hSbHCYPbptU.\",\n    \"created_at\": \"2013-06-15T01:33:33.892Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "180c6e39-a177-48bf-8efa-403ee6ac095f",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2011f9dd-d98d-48f0-ac47-cf3bca4cddd4",
+      "name": "Orders",
+      "description": {
+        "content": "Order tracking and status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "672d6ebb-6be3-49d0-8e5e-18d4818c7db1",
+          "name": "Get an Order",
+          "request": {
+            "name": "Get an Order",
+            "description": {
+              "content": "Returns an order by ID, including status and proof images.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ccf6df0-3390-4a7e-bd76-407cf70b63b3",
+              "name": "Order object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"status\": \"processing\",\n  \"message\": \"string\",\n  \"handwriting\": \"string\",\n  \"card\": \"string\",\n  \"recipient\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"street1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"company\": \"string\",\n    \"street2\": \"string\"\n  },\n  \"from\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"street1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"company\": \"string\",\n    \"street2\": \"string\"\n  },\n  \"proof_url\": \"http://lxkIilXAFFyiRIrIEZPu.pimGpCUF6IKP5qRJ.X.GqxuAt8fcshQNiblDimU8tG4zZFaiXCPz4WFBP-fF\",\n  \"created_at\": \"1968-10-04T07:33:51.145Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "755009f0-51bf-428a-b138-9505eb84a5f3",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05a44fc2-164e-4986-950d-6d639ac1d6fb",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.handwrite.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d04b2382-86cf-411f-9f35-a0052b8bbbf1",
+    "name": "Handwrite IO API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.\n\nContact Support:\n Name: Handwrite IO",
+      "type": "text/plain"
+    }
+  }
+}

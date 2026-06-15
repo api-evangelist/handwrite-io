@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handwrite IO API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Handwriting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Handwritings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.handwrite.io/v1/handwriting"
+          },
+          "docs": "Returns a list of available handwriting styles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stationery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stationery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.handwrite.io/v1/stationery"
+          },
+          "docs": "Returns a list of available stationery and card options."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Send",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.handwrite.io/v1/send",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends one or more handwritten letters. Accepts a single order or a batch (up to 1,000 individual orders per request)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.handwrite.io/v1/order/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns an order by ID, including status and proof images."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
