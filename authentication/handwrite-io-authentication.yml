@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/handwrite-io-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: API key in the format `live_hw_[key]`
+  sources:
+  - openapi/handwrite-io-openapi.yml

@@ -35,6 +35,10 @@ apis:
       - type: Rules
         url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 common:
+  - type: DomainSecurity
+    url: security/handwrite-io-domain-security.yml
+  - type: Authentication
+    url: authentication/handwrite-io-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/handwrite
   - type: Website
