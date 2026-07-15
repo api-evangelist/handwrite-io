@@ -35,6 +35,8 @@ apis:
       - type: Rules
         url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/handwrite-io-agentic-access.yml
   - type: DomainSecurity
     url: security/handwrite-io-domain-security.yml
   - type: Authentication
