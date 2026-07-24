@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: Handwrite IO Handwriting Send API
+  description: The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.
+  version: 1.0.0
+  contact:
+    name: Handwrite IO
+    url: https://documentation.handwrite.io/
+servers:
+- url: https://api.handwrite.io/v1
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Send
+  description: Send handwritten notes
+paths:
+  /send:
+    post:
+      tags:
+      - Send
+      summary: Send a Letter
+      description: Sends one or more handwritten letters. Accepts a single order or a batch (up to 1,000 individual orders per request).
+      operationId: sendLetter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/SendRequest'
+              - type: array
+                items:
+                  $ref: '#/components/schemas/SendRequest'
+      responses:
+        '200':
+          description: Array of order objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    SendRequest:
+      type: object
+      required:
+      - message
+      - handwriting
+      - card
+      - recipients
+      properties:
+        message:
+          type: string
+          maxLength: 320
+        handwriting:
+          type: string
+          description: Handwriting ID
+        card:
+          type: string
+          description: Stationery card ID
+        from:
+          $ref: '#/components/schemas/Recipient'
+        recipients:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Recipient'
+    Recipient:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - street1
+      - city
+      - state
+      - zip
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        company:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        status:
+          type: string
+          enum:
+          - processing
+          - written
+          - complete
+          - problem
+          - cancelled
+        message:
+          type: string
+        handwriting:
+          type: string
+        card:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        from:
+          $ref: '#/components/schemas/Recipient'
+        proof_url:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (60 requests per minute per API key)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key in the format `live_hw_[key]`

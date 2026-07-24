@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: Handwrite IO Handwriting API
+  description: The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.
+  version: 1.0.0
+  contact:
+    name: Handwrite IO
+    url: https://documentation.handwrite.io/
+servers:
+- url: https://api.handwrite.io/v1
+  description: Production
+security:
+- ApiKeyAuth: []
+tags:
+- name: Handwriting
+  description: Available handwriting styles
+paths:
+  /handwriting:
+    get:
+      tags:
+      - Handwriting
+      summary: Get Handwritings
+      description: Returns a list of available handwriting styles.
+      operationId: getHandwritings
+      responses:
+        '200':
+          description: Array of handwriting objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Handwriting'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (60 requests per minute per API key)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Handwriting:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        preview_url:
+          type: string
+          format: uri
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key in the format `live_hw_[key]`
