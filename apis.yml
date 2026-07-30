@@ -5,7 +5,20 @@ description: >-
   businesses can send personalized handwritten cards and notes at scale through REST endpoints.
 url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/apis.yml
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/handwrite-io.png
 tags:
   - Direct Mail
   - Handwritten
@@ -15,25 +28,74 @@ created: '2024-11-14'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: handwrite-io:handwrite-io
-    name: Handwrite IO API
-    description: >-
-      The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate
-      personalized handwritten correspondence into your workflows and applications.
-    humanURL: https://documentation.handwrite.io/#introduction
-    baseURL: https://api.handwrite.io/v1
-    tags:
-      - Handwritten
-      - Notes
-    properties:
-      - type: Documentation
-        url: https://documentation.handwrite.io/#introduction
-      - type: Authentication
-        url: https://documentation.handwrite.io/#authentication
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/openapi/handwrite-io-openapi.yml
-      - type: Rules
-        url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
+- aid: handwrite-io:handwrite-io-handwriting-api
+  name: Handwrite IO Handwriting API
+  description: Available handwriting styles
+  humanURL: https://documentation.handwrite.io/#introduction
+  baseURL: https://api.handwrite.io/v1
+  tags:
+  - Handwriting
+  properties:
+  - type: OpenAPI
+    url: openapi/handwrite-io-handwriting-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.handwrite.io/#introduction
+  - type: Authentication
+    url: https://documentation.handwrite.io/#authentication
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
+- aid: handwrite-io:handwrite-io-orders-api
+  name: Handwrite IO Orders API
+  description: Order tracking and status
+  humanURL: https://documentation.handwrite.io/#introduction
+  baseURL: https://api.handwrite.io/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/handwrite-io-orders-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.handwrite.io/#introduction
+  - type: Authentication
+    url: https://documentation.handwrite.io/#authentication
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
+- aid: handwrite-io:handwrite-io-send-api
+  name: Handwrite IO Send API
+  description: Send handwritten notes
+  humanURL: https://documentation.handwrite.io/#introduction
+  baseURL: https://api.handwrite.io/v1
+  tags:
+  - Send
+  properties:
+  - type: OpenAPI
+    url: openapi/handwrite-io-send-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.handwrite.io/#introduction
+  - type: Authentication
+    url: https://documentation.handwrite.io/#authentication
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
+- aid: handwrite-io:handwrite-io-stationery-api
+  name: Handwrite IO Stationery API
+  description: Available stationery and cards
+  humanURL: https://documentation.handwrite.io/#introduction
+  baseURL: https://api.handwrite.io/v1
+  tags:
+  - Stationery
+  properties:
+  - type: OpenAPI
+    url: openapi/handwrite-io-stationery-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.handwrite.io/#introduction
+  - type: Authentication
+    url: https://documentation.handwrite.io/#authentication
+  - type: Rules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/handwrite-io-agentic-access.yml
