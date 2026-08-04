@@ -1,0 +1,20 @@
+{
+  "provider": "handwrite-io",
+  "sources": [
+    "handwrite-io-handwriting-api-openapi.yml",
+    "handwrite-io-orders-api-openapi.yml",
+    "handwrite-io-send-api-openapi.yml",
+    "handwrite-io-stationery-api-openapi.yml"
+  ],
+  "outputs": [
+    "handwrite-io-handwriting-api-openapi.yml",
+    "handwrite-io-orders-api-openapi.yml",
+    "handwrite-io-send-api-openapi.yml",
+    "handwrite-io-stationery-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
