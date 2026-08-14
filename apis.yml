@@ -1,98 +1,142 @@
 aid: handwrite-io
 name: Handwrite IO
 description: >-
-  Handwrite IO provides a REST API that lets you send handwritten notes in an automated manner. Using the API,
-  businesses can send personalized handwritten cards and notes at scale through REST endpoints.
+  Handwrite is a South Carolina based direct-mail service that writes and mails real handwritten
+  cards on demand, and exposes that fulfillment as a small REST API at https://api.handwrite.io/v1.
+  Four operations cover the whole surface: list the handwriting styles on the account, list the
+  stationery and card options, send a card to between one and ten US recipients (or up to 1,000
+  orders in a single batch request), and fetch an order to follow it from processing through
+  written to complete and retrieve proof images of the finished card and envelope. Authentication
+  is a single static API key sent raw in the Authorization header, prefixed test_hw for unbilled
+  test-mode calls or live_hw for calls that actually mail and bill. Pricing is per mailed card
+  rather than per API call, from $2.99 down to $2.45 by volume, with the card, envelope,
+  handwriting and postage included. The API is rate limited to 60 requests per minute per key.
+  Handwrite also ships a Zapier integration for teams that do not want to write code.
 url: https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/apis.yml
 type: Index
 accessModel:
-  pricing: freemium
+  pricing: paid
   onboarding: self-serve
   trial: false
   try_now: true
   public: false
-  label: Freemium · Self-serve signup
+  label: Paid per card · Self-serve signup · Unbilled test mode
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - sandbox
+  generated: '2026-08-13'
   method: derived
+  note: >-
+    Corrected from `freemium` on 2026-08-13. The site CTA reads "START FOR FREE", but that is
+    free account creation — every mailed card is billed, and Handwrite publishes no free card
+    allowance. The free-feeling surface is test mode (test_hw keys), which exercises the API
+    without billing and without mailing anything.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/handwrite-io.png
 tags:
   - Direct Mail
   - Handwritten
+  - Handwritten Notes
+  - Cards
   - Marketing
   - Notes
+  - Print
+  - Fulfillment
+  - Customer Engagement
 created: '2024-11-14'
-modified: '2026-05-19'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: handwrite-io:handwrite-io-handwriting-api
   name: Handwrite IO Handwriting API
   description: Available handwriting styles
-  humanURL: https://documentation.handwrite.io/#introduction
+  humanURL: https://documentation.handwrite.io/#get-handwritings
   baseURL: https://api.handwrite.io/v1
   tags:
   - Handwriting
   properties:
   - type: OpenAPI
     url: openapi/handwrite-io-handwriting-api-openapi.yml
+  - type: Overlay
+    url: overlays/handwrite-io-handwriting-api-overlay.yaml
+  - type: PostmanCollection
+    url: collections/handwrite-io-handwriting-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/handwrite-io-handwriting-api.opencollection.json
   - type: Documentation
     url: https://documentation.handwrite.io/#introduction
   - type: Authentication
-    url: https://documentation.handwrite.io/#authentication
+    url: https://documentation.handwrite.io/#getting-started
   - type: Rules
     url: >-
       https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 - aid: handwrite-io:handwrite-io-orders-api
   name: Handwrite IO Orders API
   description: Order tracking and status
-  humanURL: https://documentation.handwrite.io/#introduction
+  humanURL: https://documentation.handwrite.io/#get-an-order
   baseURL: https://api.handwrite.io/v1
   tags:
   - Orders
   properties:
   - type: OpenAPI
     url: openapi/handwrite-io-orders-api-openapi.yml
+  - type: Overlay
+    url: overlays/handwrite-io-orders-api-overlay.yaml
+  - type: PostmanCollection
+    url: collections/handwrite-io-orders-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/handwrite-io-orders-api.opencollection.json
   - type: Documentation
     url: https://documentation.handwrite.io/#introduction
   - type: Authentication
-    url: https://documentation.handwrite.io/#authentication
+    url: https://documentation.handwrite.io/#getting-started
   - type: Rules
     url: >-
       https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 - aid: handwrite-io:handwrite-io-send-api
   name: Handwrite IO Send API
   description: Send handwritten notes
-  humanURL: https://documentation.handwrite.io/#introduction
+  humanURL: https://documentation.handwrite.io/#send-a-letter
   baseURL: https://api.handwrite.io/v1
   tags:
   - Send
   properties:
   - type: OpenAPI
     url: openapi/handwrite-io-send-api-openapi.yml
+  - type: Overlay
+    url: overlays/handwrite-io-send-api-overlay.yaml
+  - type: PostmanCollection
+    url: collections/handwrite-io-send-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/handwrite-io-send-api.opencollection.json
   - type: Documentation
     url: https://documentation.handwrite.io/#introduction
   - type: Authentication
-    url: https://documentation.handwrite.io/#authentication
+    url: https://documentation.handwrite.io/#getting-started
   - type: Rules
     url: >-
       https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
 - aid: handwrite-io:handwrite-io-stationery-api
   name: Handwrite IO Stationery API
   description: Available stationery and cards
-  humanURL: https://documentation.handwrite.io/#introduction
+  humanURL: https://documentation.handwrite.io/#get-stationery
   baseURL: https://api.handwrite.io/v1
   tags:
   - Stationery
   properties:
   - type: OpenAPI
     url: openapi/handwrite-io-stationery-api-openapi.yml
+  - type: Overlay
+    url: overlays/handwrite-io-stationery-api-overlay.yaml
+  - type: PostmanCollection
+    url: collections/handwrite-io-stationery-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/handwrite-io-stationery-api.opencollection.json
   - type: Documentation
     url: https://documentation.handwrite.io/#introduction
   - type: Authentication
-    url: https://documentation.handwrite.io/#authentication
+    url: https://documentation.handwrite.io/#getting-started
   - type: Rules
     url: >-
       https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml
@@ -103,16 +147,130 @@ common:
     url: security/handwrite-io-domain-security.yml
   - type: Authentication
     url: authentication/handwrite-io-authentication.yml
+  - type: Conventions
+    url: conventions/handwrite-io-conventions.yml
+  - type: ErrorCatalog
+    url: errors/handwrite-io-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/handwrite-io-rate-limits.yml
+  - type: Plans
+    url: plans/handwrite-io-plans-pricing.yml
+  - type: FinOps
+    url: finops/handwrite-io-finops.yml
+  - type: Lifecycle
+    url: lifecycle/handwrite-io-lifecycle.yml
+  - type: Sandbox
+    url: sandbox/handwrite-io-sandbox.yml
+  - type: DataModel
+    url: data-model/handwrite-io-data-model.yml
+  - type: Conformance
+    url: conformance/handwrite-io-conformance.yml
+  - type: Packages
+    url: packages/handwrite-io-packages.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/handwrite-io-llms.txt
+  - type: DeveloperPortal
+    url: https://documentation.handwrite.io/
+  - type: Documentation
+    url: https://documentation.handwrite.io/
+  - type: APIReference
+    url: https://documentation.handwrite.io/#endpoints
+  - type: GettingStarted
+    url: https://documentation.handwrite.io/#getting-started
+  - type: GitHubOrganization
+    url: https://github.com/handwriteio
+  - type: Support
+    url: https://www.handwrite.io/contact-us
+  - type: HelpCenter
+    url: https://www.handwrite.io/faq
+  - type: Blog
+    url: https://www.handwrite.io/blog
+  - type: Pricing
+    url: https://www.handwrite.io/pricing
+  - type: SignUp
+    url: https://app.handwrite.io/signup
+  - type: Login
+    url: https://app.handwrite.io/login
   - type: LinkedIn
     url: https://www.linkedin.com/company/handwrite
   - type: Website
     url: https://handwrite.io/
-  - type: Documentation
-    url: https://documentation.handwrite.io/
   - type: Integrations
     url: https://www.handwrite.io/integrations
 integrations:
   - name: Handwrite
+  - name: Zapier
+    url: https://zapier.com/apps/handwrite/integrations
+    description: >-
+      Handwrite's own integrations page positions Zapier as the no-code path — "trigger a
+      personalized handwritten card from more than 3,000 apps" including Shopify, Salesforce and
+      Magento.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1
+x-pointers-deliberately-withheld:
+  note: >-
+    Artifacts exist in this repo for these, but no apis.yml pointer is wired, because the
+    pointer would assert that HANDWRITE publishes the surface. Each was probed on 2026-08-13.
+  withheld:
+    - type: WellKnown
+      artifact: well-known/handwrite-io-well-known.yml
+      reason: every /.well-known/ path returned 404 on all four Handwrite hosts
+    - type: SecurityTxt
+      artifact: well-known/handwrite-io-well-known.yml
+      reason: /.well-known/security.txt returned 404 on all four hosts
+    - type: MCPServer
+      artifact: mcp/handwrite-io-mcp.yml
+      reason: >-
+        no server exists; the file is an API Evangelist candidate tool list derived from the
+        OpenAPI (deployment.mode = none), and mcp.handwrite.io is NXDOMAIN
+    - type: AgentCard
+      artifact: none
+      reason: >-
+        /.well-known/agent-card.json and /.well-known/agent.json returned 404 on all four hosts;
+        per pipeline rule no stub was authored
+    - type: ChangeLog
+      artifact: changelog/handwrite-io-changelog.yml
+      reason: >-
+        Handwrite publishes no changelog; the artifact reconstructs history from their own
+        API-Docs commit log and records the absence
+    - type: StatusPage
+      artifact: lifecycle/handwrite-io-lifecycle.yml
+      reason: >-
+        status.handwrite.io is NXDOMAIN and handwrite.statuspage.io 200s only because it
+        redirects to Atlassian marketing — a soft-200, not a status page
+    - type: Deprecation
+      artifact: lifecycle/handwrite-io-lifecycle.yml
+      reason: no deprecation or sunset policy published; no RFC 8594 headers observed
+    - type: Idempotency
+      artifact: conventions/handwrite-io-conventions.yml
+      reason: >-
+        no idempotency key is supported, which is a material hazard on POST /send rather than a
+        scoring nicety
+    - type: SDKs
+      artifact: packages/handwrite-io-packages.yml
+      reason: >-
+        zero first-party client libraries in any registry; the only installable client is a
+        community Elixir package last released 2020-11-14
+    - type: Compliance
+      artifact: conformance/handwrite-io-conformance.yml
+      reason: no certifications, trust center, terms of service or privacy policy published
+    - type: Security
+      artifact: none
+      reason: >-
+        probe-security-programs.py found no vulnerability disclosure program and no trust center
+    - type: Webhooks
+      artifact: none
+      reason: no webhook, callback or event surface exists; order status is polling-only
+    - type: TermsOfService / PrivacyPolicy
+      artifact: none
+      reason: >-
+        /terms, /terms-of-service, /privacy, /privacy-policy, /legal all 404 on www.handwrite.io
+        and app.handwrite.io; the site sitemap lists 15 URLs and contains no legal page
