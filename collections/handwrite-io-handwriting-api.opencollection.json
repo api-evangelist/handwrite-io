@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handwrite IO Handwriting API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Handwriting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Handwritings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.handwrite.io/v1/handwriting"
+          },
+          "docs": "Returns a list of available handwriting styles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

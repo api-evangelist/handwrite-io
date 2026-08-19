@@ -1,0 +1,64 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/#getting-started ;
+  https://raw.githubusercontent.com/handwriteio/API-Docs/master/source/includes/_intro.md
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Handwrite runs a test/live key-prefix model rather than a separate sandbox host. The same
+  base URL (https://api.handwrite.io/v1) serves both modes; which mode you are in is decided
+  entirely by the prefix of the key in the Authorization header. Test-mode calls do not count
+  against usage and do not produce a mailed card.
+sandbox_type: key-prefix mode switch
+separate_host: false
+base_url: https://api.handwrite.io/v1
+modes:
+  - name: test
+    key_prefix: test_hw
+    billed: false
+    produces_physical_mail: false
+    description: >-
+      "Test keys will not count against your usage and can be used for testing purposes."
+      Handwrite's own docs use test_hw keys in every shell and JavaScript example.
+    source: https://documentation.handwrite.io/#getting-started
+  - name: live
+    key_prefix: live_hw
+    billed: true
+    produces_physical_mail: true
+    description: Production mode. Every successful /send order is charged per card and physically mailed.
+    source: https://documentation.handwrite.io/#getting-started
+mode_signal_in_response:
+  field: environment
+  values:
+    - live
+    - test
+  observed_on: GET /v1/order/{orderId}
+  source: https://documentation.handwrite.io/#get-an-order
+  note: >-
+    The order object returned by GET /order/{orderId} carries an `environment` field, so a
+    client can confirm after the fact which mode an order was created in. This field is present
+    in the provider's documented response example but is NOT declared in the Order schema of the
+    OpenAPI in this repo — recorded here as a real, un-specified field.
+key_provisioning:
+  dashboard: https://app.handwrite.io/integrations/api
+  requires_account: true
+  self_serve: true
+  description: >-
+    "You must first sign up for a Handwrite account to obtain an API key... you can create a key
+    by going to the developer dashboard." Both test and live keys are created from the same
+    dashboard page.
+  signup: https://app.handwrite.io/signup
+not_published:
+  - test fixtures or seeded test addresses
+  - a way to force an order into `problem` / `cancelled` status for error-path testing
+  - time simulation / test clocks (orders move processing -> written -> complete on real fulfillment time)
+  - a hosted API console or "try it" widget in the docs (the Slate docs show static examples only)
+  - webhook or callback simulation
+browser_restriction: >-
+  Handwrite explicitly warns "you cannot make requests from the browser as your API token would
+  be exposed publicly" — there is no CORS-permitted public/publishable key, so all calls,
+  including test-mode calls, must be server-side.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,16 +1,87 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/handwrite-io-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/#getting-started ;
+  https://raw.githubusercontent.com/handwriteio/API-Docs/master/source/includes/_intro.md ;
+  live 401 observed from https://api.handwrite.io/v1/handwriting on 2026-08-13 ; baseline
+  derived from openapi/handwrite-io-*-openapi.yml
+docs: https://documentation.handwrite.io/#getting-started
 summary:
   types:
   - apiKey
   api_key_in:
   - header
+  oauth: false
+  openid_connect: false
+  mutual_tls: false
 schemes:
 - name: ApiKeyAuth
   type: apiKey
   in: header
   parameter: Authorization
-  description: API key in the format `live_hw_[key]`
+  scheme_prefix: none
+  bearer: false
+  description: >-
+    The raw API key is sent as the ENTIRE value of the Authorization header, with no "Bearer "
+    or other scheme prefix — e.g. `Authorization: live_hw_...`. Content-Type must be
+    application/json. Handwrite explicitly forbids calling the API from a browser, and issues no
+    publishable/CORS-safe key, so every call must be server-side.
+  key_format: '<mode>_hw_<random>'
+  key_modes:
+    test:
+      prefix: test_hw
+      billed: false
+      mails: false
+    live:
+      prefix: live_hw
+      billed: true
+      mails: true
+  provisioning:
+    self_serve: true
+    requires_account: true
+    dashboard: https://app.handwrite.io/integrations/api
+    signup: https://app.handwrite.io/signup
+  rotation_policy: not published
+  expiry: none published (static key)
+  scopes: none — the key is all-or-nothing across all four operations
+  applied_to:
+    - getHandwritings
+    - getStationery
+    - sendLetter
+    - getOrder
   sources:
-  - openapi/handwrite-io-openapi.yml
+  - https://documentation.handwrite.io/#getting-started
+  - openapi/handwrite-io-handwriting-api-openapi.yml
+  - openapi/handwrite-io-orders-api-openapi.yml
+  - openapi/handwrite-io-send-api-openapi.yml
+  - openapi/handwrite-io-stationery-api-openapi.yml
+failure_behavior:
+  status: 401
+  observed: '2026-08-13'
+  probe_url: https://api.handwrite.io/v1/handwriting
+  body: >-
+    {"message":"No token provided. Please make sure to include it in your headers, e.g.
+    Authorization: test_HW_..."}
+  note: >-
+    The API distinguishes a missing token from a wrong one in the human-readable message only;
+    both are 401 and neither carries a machine-readable error code.
+oauth:
+  supported: false
+  discovery_probed:
+    - path: /.well-known/oauth-authorization-server
+      status: 404
+    - path: /.well-known/openid-configuration
+      status: 404
+  hosts_probed: api.handwrite.io, handwrite.io, www.handwrite.io, documentation.handwrite.io
+observations:
+  - >-
+    A single static, unscoped key that can mail physical billed cards is a meaningful blast
+    radius. There is no way to issue a read-only credential for the two list operations or the
+    order lookup, so any integration that only needs to check order status still holds a key
+    that can spend money.
+  - >-
+    Test-mode isolation is the one mitigating control: a test_hw key exercises the same
+    endpoints without billing or mailing. Grant test keys to anything that does not need to send.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

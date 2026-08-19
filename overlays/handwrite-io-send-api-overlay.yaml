@@ -1,0 +1,95 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Handwrite IO Send API
+  version: 1.0.0
+  x-generated: '2026-08-13'
+  x-method: generated
+  x-source: >-
+    Enhancements derived from https://documentation.handwrite.io/ and API Evangelist artifacts in
+    this repo. Applies to openapi/handwrite-io-send-api-openapi.yml — the original spec is never mutated.
+extends: openapi/handwrite-io-send-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: handwrite-io
+      x-apievangelist-artifacts:
+        conventions: conventions/handwrite-io-conventions.yml
+        errors: errors/handwrite-io-problem-types.yml
+        rate-limits: rate-limits/handwrite-io-rate-limits.yml
+        lifecycle: lifecycle/handwrite-io-lifecycle.yml
+        authentication: authentication/handwrite-io-authentication.yml
+        sandbox: sandbox/handwrite-io-sandbox.yml
+        data-model: data-model/handwrite-io-data-model.yml
+      x-spec-provenance: >-
+        This OpenAPI is an API Evangelist derivation from Handwrite's published Slate
+        documentation (documentation.handwrite.io, source at github.com/handwriteio/API-Docs).
+        Handwrite does not publish an OpenAPI of their own — probed 2026-08-13.
+  - target: $.components.securitySchemes.ApiKeyAuth
+    update:
+      x-scheme-prefix: none
+      x-key-modes:
+        test: test_hw
+        live: live_hw
+      description: >-
+        Raw API key sent as the ENTIRE Authorization header value, with no "Bearer " prefix.
+        Keys are prefixed test_hw (not billed, no mail produced) or live_hw (billed, mails a
+        card). Content-Type must be application/json. Browser-side use is forbidden by the
+        provider. Create keys at https://app.handwrite.io/integrations/api
+  - target: $.components.responses.RateLimited
+    update:
+      x-rate-limit:
+        limit: 60
+        window: minute
+        scope: api-key
+        headers:
+          - X-RateLimit-Limit
+          - X-RateLimit-Remaining
+          - X-RateLimit-Reset
+        retry_after: false
+        error_code: rate_limit_exceeded
+        observed: '2026-08-13'
+  - target: $.paths['/send'].post
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: physical
+        subject: required
+        audience: null
+        token:
+          max-ttl: 300
+          exchange: true
+          purpose-required: true
+        escalation:
+          human-in-the-loop: conditional
+          triggers:
+            - abnormal
+            - high-value
+        audit: required
+      x-idempotency:
+        supported: false
+        hazard: high
+        guidance: >-
+          Handwrite publishes no idempotency key. This operation writes and mails a physical
+          card and cancellations are not typically allowed, so a retry after a timeout or 5xx
+          can duplicate real mail at real cost. Treat as at-most-once: capture the returned
+          order _id and reconcile with GET /order/{orderId} rather than resending.
+      x-batch:
+        supported: true
+        mechanism: request body accepts a single SendRequest object OR an array of them
+        max_orders_per_request: 1000
+        order_definition: 1 message x 1 recipient
+        partial_failure_semantics: not documented by the provider
+      x-billing:
+        model: per mailed card
+        currency: USD
+        bands_source: plans/handwrite-io-plans-pricing.yml
+        note: >-
+          Every recipient in a live-mode request is a separately billed card, priced $2.99 down
+          to $2.45 by volume band. Test-mode keys are not billed and do not mail.
+  - target: $.components.schemas.Recipient
+    update:
+      x-geography: US only — `state` must be a capitalized two-letter US abbreviation and `zip`
+        must be exactly 5 characters. There is no country field.
+      x-company-behavior: >-
+        When `company` is present it prints on the first address line, with attention-to on the
+        second.

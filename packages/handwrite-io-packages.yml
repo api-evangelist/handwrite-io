@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/#third-party-packages ;
+  https://raw.githubusercontent.com/handwriteio/API-Docs/master/source/includes/_third_party.md ;
+  registry probes of npm, PyPI, RubyGems, Packagist, Hex
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Client libraries for the Handwrite API. Handwrite publishes NO first-party SDK in any
+  registry. Their own documentation says "We have language bindings in Shell and JavaScript,
+  with Python and Ruby coming soon!" — those are curl/Node request snippets inside the docs,
+  not installable packages. The only installable client is a community Elixir library the
+  docs themselves credit to an outside author.
+official_sdk_count: 0
+packages:
+  - language: elixir
+    registry: hex
+    name: handwrite
+    url: https://hex.pm/packages/handwrite
+    docs: https://hexdocs.pm/handwrite/readme.html
+    repository: https://github.com/timpile/handwrite
+    install: '{:handwrite, "~> 1.0.0"}'
+    official: false
+    version: 1.0.0
+    published: '2020-11-14'
+    note: >-
+      Third-party, authored by Tim Pile and linked from Handwrite's own "Third Party Packages"
+      docs section. Last release 2020-11-14 — nearly six years stale against an API whose docs
+      changed as recently as 2026-03-18 (handwriteio/API-Docs), including the 2023 addition of
+      /send batch mode and the 2021 recipient-limit change. Treat as unmaintained.
+registries_checked:
+  - registry: npm
+    query: handwrite
+    result: no first-party package; all matches are unrelated handwriting/canvas libraries
+  - registry: pypi
+    query: handwrite / handwriteio / handwrite-io
+    result: >-
+      pypi.org/project/handwrite exists but is builtree/handwrite (text-to-custom-handwriting
+      font tool) — NOT Handwrite IO. handwriteio and handwrite-io return 404.
+  - registry: rubygems
+    query: handwrite / handwrite-io
+    result: 404 on both
+  - registry: packagist
+    query: handwrite
+    result: no first-party package
+  - registry: hex
+    query: handwrite
+    result: hit — community Elixir client (recorded above)
+  - registry: crates.io
+    query: handwrite
+    result: no first-party package
+  - registry: nuget / maven / pkg.go.dev
+    query: handwrite
+    result: not applicable; provider ships no compiled-language client
+github:
+  organization: https://github.com/handwriteio
+  repositories:
+    - name: API-Docs
+      url: https://github.com/handwriteio/API-Docs
+      note: Slate source for documentation.handwrite.io — docs, not a client library
+    - name: react-step-wizard
+      url: https://github.com/handwriteio/react-step-wizard
+      note: general-purpose React component, unrelated to the API
+    - name: Adapter
+      url: https://github.com/handwriteio/Adapter
+      note: CSV import adapter for flatfile.io, unrelated to the API
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,91 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://github.com/handwriteio/API-Docs/commits (the provider's own public documentation
+  repository) ; https://documentation.handwrite.io/
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Handwrite publishes NO changelog, release notes, or version history page. Neither the docs
+  site nor the marketing site has one, and there is no dated entry list anywhere on a Handwrite
+  domain. What follows is reconstructed from the public commit history of Handwrite's own Slate
+  documentation repository, github.com/handwriteio/API-Docs — a real, dated, provider-authored
+  record of documented API changes, but NOT a changelog the provider offers to consumers. For
+  that reason NO `ChangeLog` pointer is wired into apis.yml: the artifact records the absence and
+  the evidence behind it, and asserting a ChangeLog pointer would credit Handwrite with a surface
+  they do not publish.
+published_changelog: false
+changelog_url: null
+scheme: none
+versioning_scheme: uri-path (v1)
+current_version: v1
+probes:
+  - url: https://documentation.handwrite.io/
+    status: 200
+    finding: >-
+      Full docs table of contents is Introduction, Getting Started, Endpoints, Rate Limiting,
+      Response Codes, Third Party Packages. No changelog or release-notes section.
+  - url: https://www.handwrite.io/sitemap.xml
+    status: 200
+    finding: >-
+      15 URLs — blog, pricing, faq, integrations, case studies. No changelog page.
+reconstructed_from: https://github.com/handwriteio/API-Docs/commits
+reconstruction_caveat: >-
+  Commit dates are when the DOCUMENTATION changed, which may lag or lead the API change itself.
+  Nothing here is a Handwrite version number; there are none.
+entries:
+  - date: '2026-03-18'
+    type: docs
+    breaking: false
+    summary: Clarified endpoint documentation by removing a note about proof access.
+  - date: '2023-09-04'
+    type: addition
+    breaking: false
+    summary: >-
+      Documented batch mode on POST /send — the endpoint accepts an array of order objects, up
+      to 1,000 individual orders (1 message x 1 recipient) per request.
+    affects:
+      - sendLetter
+  - date: '2023-09-03'
+    type: docs
+    breaking: false
+    summary: Fixed the developer dashboard link (now https://app.handwrite.io/integrations/api).
+  - date: '2021-03-12'
+    type: breaking
+    breaking: true
+    summary: >-
+      Recipient limitation changed — POST /send now accepts a maximum of 10 recipients per
+      order object. Documented as "our new recipient limitation"; consumers previously sending
+      larger recipient arrays would have been affected.
+    affects:
+      - sendLetter
+  - date: '2020-09-18'
+    type: addition
+    breaking: false
+    summary: Added the GET /order/{orderId} endpoint — order status and proof images.
+    affects:
+      - getOrder
+  - date: '2020-07-08'
+    type: docs
+    breaking: false
+    summary: Removed the signup link from the documentation.
+  - date: '2019-11-23'
+    type: docs
+    breaking: false
+    summary: Marked non-required fields on the send request correctly.
+  - date: '2019-11-22'
+    type: change
+    breaking: true
+    summary: >-
+      Renamed the letter body field from `text` to `message`, and added `message` to the order
+      response.
+    affects:
+      - sendLetter
+observations:
+  api_surface_last_grew: '2020-09-18'
+  note: >-
+    The Handwrite API has had the same four operations since September 2020. Every change since
+    has been a documentation clarification or a tightening of an existing limit.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

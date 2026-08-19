@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "ec991b2c-5a64-4056-912e-4ae2b2607603",
+      "name": "Handwriting",
+      "description": {
+        "content": "Available handwriting styles",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a82bb5cb-dc75-422b-a880-e4f59cea388f",
+          "name": "Get Handwritings",
+          "request": {
+            "name": "Get Handwritings",
+            "description": {
+              "content": "Returns a list of available handwriting styles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "handwriting"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f96fe88c-ff22-4e8a-a7ac-534fe17ecbe5",
+              "name": "Array of handwriting objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "handwriting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://uxhWkVCvUYwfkJhyijKNxBuCdqQiK.lmxoaQzk+hbk,H5fF28\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"http://prygtmvWRR.zufqEKdi3tGqAzLhXqt,II.P7o5TH,GWQvDFj8kDJXk.p0a.F1LztSZ\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83390fbb-3351-4f5c-8607-cd734cae0442",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "handwriting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.handwrite.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "06bef4da-337a-4e40-8811-7980e7b1a022",
+    "name": "Handwrite IO Handwriting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.\n\nContact Support:\n Name: Handwrite IO",
+      "type": "text/plain"
+    }
+  }
+}

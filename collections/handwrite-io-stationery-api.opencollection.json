@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handwrite IO Handwriting Stationery API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stationery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stationery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.handwrite.io/v1/stationery"
+          },
+          "docs": "Returns a list of available stationery and card options."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

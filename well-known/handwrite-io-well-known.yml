@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of every apis.yml baseURL host, OpenAPI servers[] host, and the docs host
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Probe of the /.well-known/ discovery surface across every Handwrite host. RESULT: NOTHING IS
+  SERVED. Every path on every host returned 404. Two hosts return a JSON 404 body
+  ({"message":"security.txt not found"} on handwrite.io — a Squarespace-generated response, not
+  a document), which is a 404 and is recorded as a miss. No WellKnown or SecurityTxt pointer is
+  wired into apis.yml, because there is nothing for one to point at.
+result: none
+documents_found: 0
+hosts:
+  - host: https://api.handwrite.io
+    role: API base (apis.yml baseURL + OpenAPI servers[])
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+    note: >-
+      Express/Heroku origin. Returns a genuine JSON 404 ({"message":"Not Found!"}) on unknown
+      paths — no SPA catch-all, so these are real negatives.
+  - host: https://handwrite.io
+    role: marketing site (Squarespace)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.handwrite.io
+    role: marketing site (canonical www)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://documentation.handwrite.io
+    role: developer documentation (Slate static site)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+also_probed:
+  - path: /llms.txt
+    hosts: api.handwrite.io, handwrite.io, www.handwrite.io, documentation.handwrite.io
+    status: 404
+    note: no provider-published llms.txt on any host
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

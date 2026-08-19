@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Handwrite IO Handwriting Send API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Send",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.handwrite.io/v1/send",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends one or more handwritten letters. Accepts a single order or a batch (up to 1,000 individual orders per request)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

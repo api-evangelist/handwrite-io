@@ -1,0 +1,58 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  Generated from openapi/handwrite-io-*-openapi.yml, https://documentation.handwrite.io/, and the
+  conventions/, errors/, rate-limits/ and lifecycle/ artifacts in this repository. Handwrite
+  publishes no skills, AGENTS.md, or agent documentation of its own — searched 2026-08-13.
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Packaged Agent Skills for the Handwrite API. Three skills cover the whole four-operation
+  surface. Every operationId referenced below exists in the OpenAPI in this repository; none is
+  invented.
+skills:
+  - name: handwrite-io-send-handwritten-card
+    file: skills/handwrite-io-send-handwritten-card.md
+    summary: Write and mail a real handwritten card to 1-10 US recipients, or up to 1,000 in batch.
+    api: handwrite-io:handwrite-io-send-api
+    operations:
+      - getHandwritings
+      - getStationery
+      - sendLetter
+      - getOrder
+    consequence: physical
+    human_in_the_loop: required
+    note: >-
+      Billed per mailed card and irreversible. Carries the no-idempotency hazard and the
+      at-most-once discipline that follows from it.
+  - name: handwrite-io-track-order
+    file: skills/handwrite-io-track-order.md
+    summary: >-
+      Poll an order from processing through written to complete, retrieve proof images, and
+      reconcile an ambiguous send.
+    api: handwrite-io:handwrite-io-orders-api
+    operations:
+      - getOrder
+    consequence: read
+    human_in_the_loop: not-required
+    note: >-
+      Polling is the only observation mechanism — Handwrite ships no webhooks and no
+      list-orders endpoint.
+  - name: handwrite-io-browse-options
+    file: skills/handwrite-io-browse-options.md
+    summary: >-
+      List handwriting styles and stationery with preview images to obtain the ids a send
+      requires.
+    api: handwrite-io:handwrite-io-handwriting-api
+    operations:
+      - getHandwritings
+      - getStationery
+    consequence: read
+    human_in_the_loop: not-required
+coverage:
+  operations_in_spec: 4
+  operations_covered: 4
+  uncovered: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "beb19f08-ff12-48b1-8fb1-977bf477a1ac",
+      "name": "Stationery",
+      "description": {
+        "content": "Available stationery and cards",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43d86051-b2e0-433b-a3d8-b3326cd1c6d6",
+          "name": "Get Stationery",
+          "request": {
+            "name": "Get Stationery",
+            "description": {
+              "content": "Returns a list of available stationery and card options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stationery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22f89ece-36cf-4367-bee2-d96b51556ab9",
+              "name": "Array of stationery objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stationery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"https://SHqbCOAXgeBAWGgVnLXNWxyBVpUyJVGMi.bsucsQSbRPEbHtKye6FYQuZNONZBN0GINMfp12bW3DLu8oGyAvdTDdhmqs9\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"preview_url\": \"http://krqnxyWtwuaptIkATYUbqhBlA.tdlFaviWTb5AEjwKDn6fCVkP2vWiOCQA.fmVhFCGYVcvqmct2aHizDBPgG0FAW+B0Xl9SO1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "626650c9-552d-4ffe-a7f5-2a873626dfe6",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stationery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.handwrite.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5d7d005c-ddea-4dd2-8099-122853835df0",
+    "name": "Handwrite IO Handwriting Stationery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.\n\nContact Support:\n Name: Handwrite IO",
+      "type": "text/plain"
+    }
+  }
+}

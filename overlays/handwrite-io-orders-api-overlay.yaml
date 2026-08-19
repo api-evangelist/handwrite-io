@@ -1,0 +1,81 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Handwrite IO Orders API
+  version: 1.0.0
+  x-generated: '2026-08-13'
+  x-method: generated
+  x-source: >-
+    Enhancements derived from https://documentation.handwrite.io/ and API Evangelist artifacts in
+    this repo. Applies to openapi/handwrite-io-orders-api-openapi.yml — the original spec is never mutated.
+extends: openapi/handwrite-io-orders-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: handwrite-io
+      x-apievangelist-artifacts:
+        conventions: conventions/handwrite-io-conventions.yml
+        errors: errors/handwrite-io-problem-types.yml
+        rate-limits: rate-limits/handwrite-io-rate-limits.yml
+        lifecycle: lifecycle/handwrite-io-lifecycle.yml
+        authentication: authentication/handwrite-io-authentication.yml
+        sandbox: sandbox/handwrite-io-sandbox.yml
+        data-model: data-model/handwrite-io-data-model.yml
+      x-spec-provenance: >-
+        This OpenAPI is an API Evangelist derivation from Handwrite's published Slate
+        documentation (documentation.handwrite.io, source at github.com/handwriteio/API-Docs).
+        Handwrite does not publish an OpenAPI of their own — probed 2026-08-13.
+  - target: $.components.securitySchemes.ApiKeyAuth
+    update:
+      x-scheme-prefix: none
+      x-key-modes:
+        test: test_hw
+        live: live_hw
+      description: >-
+        Raw API key sent as the ENTIRE Authorization header value, with no "Bearer " prefix.
+        Keys are prefixed test_hw (not billed, no mail produced) or live_hw (billed, mails a
+        card). Content-Type must be application/json. Browser-side use is forbidden by the
+        provider. Create keys at https://app.handwrite.io/integrations/api
+  - target: $.components.responses.RateLimited
+    update:
+      x-rate-limit:
+        limit: 60
+        window: minute
+        scope: api-key
+        headers:
+          - X-RateLimit-Limit
+          - X-RateLimit-Remaining
+          - X-RateLimit-Reset
+        retry_after: false
+        error_code: rate_limit_exceeded
+        observed: '2026-08-13'
+  - target: $.paths['/order/{orderId}'].get
+    update:
+      x-agentic-access:
+        action-class: connected
+        consequence: read
+        subject: optional
+        token:
+          max-ttl: 3600
+        audit: none
+      x-observation-model: >-
+        Polling only. Handwrite publishes no webhooks, callbacks or event stream, so fulfillment
+        progress (processing -> written -> complete) can only be observed by re-fetching this
+        operation. Respect the 60 requests-per-minute key limit when polling.
+      x-no-list-endpoint: >-
+        There is no list-orders operation. Orders are addressable one at a time by id only, so a
+        client MUST persist every _id returned by POST /send or lose the ability to track it.
+  - target: $.components.schemas.Order
+    update:
+      x-provider-payload-divergence: >-
+        The provider's own documented response (documentation.handwrite.io/#get-an-order) uses
+        `to` where this schema says `recipient`, `createdAt` where this schema says `created_at`,
+        and returns `proofs` as an array of {job_type, image_url} objects (job_type is `card` or
+        `envelope`) rather than a single `proof_url`. The provider payload also carries an
+        `environment` field valued `live` or `test`, which this schema omits. The provider is
+        authoritative; see data-model/handwrite-io-data-model.yml.
+      x-status-semantics:
+        processing: order accepted, not yet written
+        written: written but not yet delivered
+        complete: has been mailed; proof images available
+        problem: rare — technical issue on Handwrite's end which they will resolve
+        cancelled: rare — Handwrite does not typically allow cancellations

@@ -1,0 +1,63 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Handwrite IO Handwriting API
+  version: 1.0.0
+  x-generated: '2026-08-13'
+  x-method: generated
+  x-source: >-
+    Enhancements derived from https://documentation.handwrite.io/ and API Evangelist artifacts in
+    this repo. Applies to openapi/handwrite-io-handwriting-api-openapi.yml — the original spec is never mutated.
+extends: openapi/handwrite-io-handwriting-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: handwrite-io
+      x-apievangelist-artifacts:
+        conventions: conventions/handwrite-io-conventions.yml
+        errors: errors/handwrite-io-problem-types.yml
+        rate-limits: rate-limits/handwrite-io-rate-limits.yml
+        lifecycle: lifecycle/handwrite-io-lifecycle.yml
+        authentication: authentication/handwrite-io-authentication.yml
+        sandbox: sandbox/handwrite-io-sandbox.yml
+        data-model: data-model/handwrite-io-data-model.yml
+      x-spec-provenance: >-
+        This OpenAPI is an API Evangelist derivation from Handwrite's published Slate
+        documentation (documentation.handwrite.io, source at github.com/handwriteio/API-Docs).
+        Handwrite does not publish an OpenAPI of their own — probed 2026-08-13.
+  - target: $.components.securitySchemes.ApiKeyAuth
+    update:
+      x-scheme-prefix: none
+      x-key-modes:
+        test: test_hw
+        live: live_hw
+      description: >-
+        Raw API key sent as the ENTIRE Authorization header value, with no "Bearer " prefix.
+        Keys are prefixed test_hw (not billed, no mail produced) or live_hw (billed, mails a
+        card). Content-Type must be application/json. Browser-side use is forbidden by the
+        provider. Create keys at https://app.handwrite.io/integrations/api
+  - target: $.components.responses.RateLimited
+    update:
+      x-rate-limit:
+        limit: 60
+        window: minute
+        scope: api-key
+        headers:
+          - X-RateLimit-Limit
+          - X-RateLimit-Remaining
+          - X-RateLimit-Reset
+        retry_after: false
+        error_code: rate_limit_exceeded
+        observed: '2026-08-13'
+  - target: $.paths['/handwriting'].get
+    update:
+      x-agentic-access:
+        action-class: connected
+        consequence: read
+        subject: optional
+        token:
+          max-ttl: 3600
+        audit: none
+      x-response-shape: bare JSON array, no envelope and no pagination
+      x-identifier-note: >-
+        _id is a bare 24-hex ObjectId with no type prefix — indistinguishable from a stationery
+        or order id. Pass it to POST /send as `handwriting`.

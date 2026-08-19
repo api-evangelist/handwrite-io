@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/#response-codes ;
+  https://raw.githubusercontent.com/handwriteio/API-Docs/master/source/includes/_errors.md ;
+  live 401 and 404 responses observed from https://api.handwrite.io on 2026-08-13 ; enriched
+  from openapi/handwrite-io-*-openapi.yml 4xx/5xx responses
+provider: Handwrite IO
+providerId: handwrite-io
+format: custom-json
+rfc9457: false
+media_type: application/json
+description: >-
+  Handwrite publishes a conventional HTTP response-code table and returns a plain JSON body on
+  error. It does NOT use RFC 9457 problem+json — no `type`, `title`, `status`, `detail`,
+  `instance` members and no application/problem+json media type. There is no published catalog
+  of machine-readable error CODES beyond the one named string `rate_limit_exceeded`; most
+  failures are distinguishable only by HTTP status plus a human-readable `message`.
+envelope:
+  observed:
+    message: string
+    note: >-
+      Live probes returned a single-key body, e.g. {"message":"No token provided. Please make
+      sure to include it in your headers, e.g. Authorization: test_HW_..."} on 401 and
+      {"message":"Not Found!"} on 404.
+  declared_in_openapi:
+    error: string
+    message: string
+    note: >-
+      The Error schema in openapi/ declares both `error` and `message`. Only `message` was
+      observed on the wire in the 2026-08-13 probes; `error` is where the documented
+      `rate_limit_exceeded` code is expected to appear on a 429.
+problem_types:
+  - status: 400
+    name: Bad Request
+    title: Your request is invalid.
+    remediation: >-
+      Check required fields on POST /send — message (<=320 chars), card, handwriting, and
+      recipients (1-10 objects, each with firstName, lastName, street1, city, state as a
+      capitalized 2-letter abbreviation, and a 5-character zip).
+    code: null
+    source: https://documentation.handwrite.io/#response-codes
+  - status: 401
+    name: Unauthorized
+    title: Your API key is wrong.
+    remediation: >-
+      Send the raw key in the Authorization header with no scheme prefix, e.g.
+      `Authorization: live_hw_...`. Also set Content-Type: application/json.
+    code: null
+    observed_message: >-
+      No token provided. Please make sure to include it in your headers, e.g. Authorization:
+      test_HW_...
+    observed: '2026-08-13'
+    source: https://documentation.handwrite.io/#response-codes
+  - status: 404
+    name: Not Found
+    title: The specified resource could not be found.
+    remediation: Verify the orderId on GET /order/{orderId}; verify the path is under /v1.
+    code: null
+    operations:
+      - getOrder
+    source: https://documentation.handwrite.io/#response-codes
+  - status: 429
+    name: Too Many Requests
+    title: "You're requesting too much! Slow down!"
+    code: rate_limit_exceeded
+    remediation: >-
+      The limit is 60 requests per minute per API key. No Retry-After is returned; read the
+      X-RateLimit-Reset epoch second and wait until it passes.
+    operations:
+      - getHandwritings
+      - getStationery
+      - sendLetter
+      - getOrder
+    source: https://documentation.handwrite.io/#rate-limiting
+  - status: 500
+    name: Internal Server Error
+    title: We had a problem with our server. Try again later.
+    code: null
+    remediation: Retry with exponential backoff; /send is not idempotent, so see the warning below.
+    source: https://documentation.handwrite.io/#response-codes
+  - status: 503
+    name: Service Unavailable
+    title: We're temporarily offline for maintenance. Please try again later.
+    code: null
+    remediation: Retry later; there is no status page to check (see lifecycle/).
+    source: https://documentation.handwrite.io/#response-codes
+retry_hazard:
+  operation: sendLetter
+  severity: high
+  description: >-
+    POST /send has a PHYSICAL, irreversible consequence — a card is written and mailed — and
+    Handwrite publishes no idempotency key. A blind retry after a 500 or a timeout can mail the
+    same card twice, and the docs state Handwrite does "not allow cancellations typically".
+    Agents must treat /send as at-most-once: on an ambiguous failure, reconcile with
+    GET /order/{orderId} before resending.
+coverage:
+  documented_statuses: 6
+  documented_error_codes: 1
+  statuses_in_openapi:
+    - '429'
+    - '404'
+  gap: >-
+    The OpenAPI in this repo declares only 429 (all operations) and 404 (getOrder). The
+    documented 400/401/500/503 are not modelled per-operation in the spec.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

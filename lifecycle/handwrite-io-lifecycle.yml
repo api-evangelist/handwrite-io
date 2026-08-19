@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/ ; https://github.com/handwriteio/API-Docs commit history ;
+  live probes of status.handwrite.io and handwrite.statuspage.io on 2026-08-13 ; derived from
+  openapi/handwrite-io-*-openapi.yml
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Versioning, deprecation, status and support posture for the Handwrite API. Handwrite versions
+  by URI path and has stayed on v1 since 2019. It publishes NO deprecation policy, NO status
+  page, NO SLA and NO changelog. Nothing here is inferred — each absence below was probed.
+versioning:
+  style: uri-path
+  current_version: v1
+  base_url: https://api.handwrite.io/v1
+  versions_published:
+    - v1
+  first_documented: '2019-10'
+  note: >-
+    The Slate docs repo (handwriteio/API-Docs) has carried /v1 since its first commits in
+    November 2019. No v2 and no preview/beta version is published.
+  content_negotiation: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594_compliant: false
+deprecation_policy:
+  published: false
+  url: null
+  notice_period: null
+  note: >-
+    No deprecation or sunset policy exists on the docs site, the marketing site, or in the docs
+    repo. No RFC 8594 Sunset or Deprecation header was observed on the 2026-08-13 live probe. No
+    Deprecation pointer is wired into apis.yml, because there is no policy to point at.
+deprecated_operations:
+  count: 0
+  note: 'No operation in openapi/ carries `deprecated: true`.'
+status_page:
+  published: false
+  url: null
+  evidence:
+    - url: https://status.handwrite.io/
+      status: 000
+      note: DNS does not resolve / connection failed
+    - url: https://handwrite.statuspage.io/
+      status: 200
+      note: >-
+        FALSE POSITIVE — the 200 is an Atlassian redirect. The request ends at
+        https://www.atlassian.com/software/statuspage (title "Real-Time Incident Communication
+        with Statuspage"), and /api/v2/status.json redirects to statuspage.io marketing. There
+        is no Handwrite status page. No StatusPage pointer is wired into apis.yml.
+  documented_maintenance_signal:
+    status: 503
+    meaning: "We're temporarily offline for maintenance. Please try again later."
+    source: https://documentation.handwrite.io/#response-codes
+    note: >-
+      A documented 503 is the only maintenance signal Handwrite gives a client. With no status
+      page, an agent cannot distinguish planned maintenance from an outage.
+sla:
+  published: false
+  uptime_target: null
+  support_response_target: null
+fulfillment_lifecycle:
+  description: >-
+    Distinct from the API version lifecycle — this is the lifecycle of the physical artifact the
+    API creates, and it is what a client actually polls.
+  states:
+    - name: processing
+      meaning: order accepted, not yet written
+    - name: written
+      meaning: written but not yet delivered
+    - name: complete
+      meaning: has been mailed
+    - name: problem
+      meaning: rare; technical issue on Handwrite's end which they will resolve
+    - name: cancelled
+      meaning: also rare; Handwrite does not typically allow cancellations
+  observation_mechanism: polling GET /order/{orderId}
+  push_mechanism: none
+  source: https://documentation.handwrite.io/#get-an-order
+support:
+  email: hello@handwrite.io
+  contact_page: https://www.handwrite.io/contact-us
+  faq: https://www.handwrite.io/faq
+  developer_dashboard: https://app.handwrite.io/integrations/api
+  status_channel: none
+  issue_tracker: https://github.com/handwriteio/API-Docs/issues
+  note: The docs repo has an issue template ("start-here"), the only public developer feedback channel.
+maintenance_signal:
+  docs_repo: https://github.com/handwriteio/API-Docs
+  last_commit: '2026-03-18'
+  last_commit_message: Clarify endpoint documentation by removing proof access note
+  note: >-
+    The docs repo is still touched, which is the strongest evidence the API is maintained. But
+    the surface has not grown since GET /order was added in September 2020, and the only
+    installable client library last shipped in November 2020.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

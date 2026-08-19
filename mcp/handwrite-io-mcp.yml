@@ -1,0 +1,79 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+provider: Handwrite IO
+providerId: handwrite-io
+source: >-
+  Derived from openapi/handwrite-io-*-openapi.yml after searching for a published server:
+  https://documentation.handwrite.io/ (no MCP section), the handwriteio GitHub organization
+  (3 repos, none MCP), and an npm registry search for "handwrite" (no first-party package).
+  Probed mcp.handwrite.io — DNS does not resolve.
+description: >-
+  Handwrite ships NO MCP server, hosted or local. This file is an API Evangelist CANDIDATE tool
+  list derived one-to-one from the four documented REST operations, so the shape of an eventual
+  server is on record. It is not a Handwrite artifact and it is not callable. NO `MCPServer`
+  pointer is wired into apis.yml — asserting one would credit Handwrite with an agent surface
+  that does not exist.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  note: >-
+    `auth: api-key` describes what a server WOULD need — the underlying REST API takes a raw
+    key in the Authorization header with no scheme prefix. There is no server to authenticate to.
+server:
+  name: handwrite-io
+  transport: null
+  url: null
+tools:
+  - name: list_handwritings
+    description: List the handwriting styles available to the account, with preview image URLs.
+    source_operation: openapi/handwrite-io-handwriting-api-openapi.yml#getHandwritings
+    read_only: true
+    input_schema_source: no parameters
+  - name: list_stationery
+    description: >-
+      List stationery and card options available to the account, including any custom stationery
+      uploaded, with preview image URLs.
+    source_operation: openapi/handwrite-io-stationery-api-openapi.yml#getStationery
+    read_only: true
+    input_schema_source: no parameters
+  - name: send_handwritten_card
+    description: >-
+      Write and mail a handwritten card to 1-10 US recipients. PHYSICAL, BILLED, IRREVERSIBLE.
+    source_operation: openapi/handwrite-io-send-api-openapi.yml#sendLetter
+    read_only: false
+    input_schema_source: requestBody SendRequest (message, handwriting, card, recipients[], from)
+    consequence: physical
+    guardrails:
+      - Requires human confirmation — each call mails real cards and is billed per card.
+      - >-
+        No idempotency key exists; a retry duplicates physical mail. Reconcile with get_order
+        instead of retrying.
+      - Cancellations are not typically allowed once submitted.
+  - name: get_order
+    description: >-
+      Fetch one order by id — fulfillment status (processing / written / complete / problem /
+      cancelled) and, once complete, proof images of the card and envelope.
+    source_operation: openapi/handwrite-io-orders-api-openapi.yml#getOrder
+    read_only: true
+    input_schema_source: path parameter orderId (string, 24-hex ObjectId)
+search_evidence:
+  - target: https://documentation.handwrite.io/
+    status: 200
+    finding: docs table of contents has no MCP, agent, or AI section
+  - target: https://api.github.com/orgs/handwriteio/repos
+    status: 200
+    finding: 'API-Docs, react-step-wizard, Adapter — no MCP server'
+  - target: npm registry search "handwrite"
+    status: 200
+    finding: no first-party Handwrite package of any kind
+  - target: https://mcp.handwrite.io
+    status: 000
+    finding: DNS does not resolve
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,135 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/ (all sections) ; live probes of https://api.handwrite.io
+  on 2026-08-13 ; derived from openapi/handwrite-io-*-openapi.yml
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Cross-cutting runtime semantics for the Handwrite REST API, read from the provider's own
+  documentation and confirmed on the wire where possible. Handwrite is a small, flat API: four
+  operations, one auth scheme, one rate limit, no pagination, no idempotency, no webhooks.
+  Where a convention is absent, that absence is recorded rather than invented — several of them
+  matter a great deal because /send has a physical, irreversible effect.
+authentication:
+  style: api-key
+  location: header
+  header: Authorization
+  scheme_prefix: none
+  format: '<mode>_hw_<random>'
+  example_shape: 'live_hw_...'  # value shape only; see sandbox/ for mode semantics
+  bearer: false
+  note: >-
+    The raw key is sent as the entire Authorization header value with NO "Bearer " prefix. This
+    is unusual and is the most common integration mistake against this API. Content-Type must
+    be application/json.
+  browser_use_forbidden: true
+  detail: authentication/handwrite-io-authentication.yml
+  source: https://documentation.handwrite.io/#getting-started
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    Handwrite publishes NO idempotency key and no request-deduplication guarantee. This is the
+    single most consequential gap in the API: POST /send physically writes and mails a card, and
+    the docs say cancellations are not typically allowed, so a retried or duplicated request
+    produces a duplicated piece of physical mail at real cost. Recommended client discipline:
+    treat /send as at-most-once, capture the returned order _id immediately, and on any
+    ambiguous failure reconcile via GET /order/{orderId} rather than resending. NO Idempotency
+    pointer is wired into apis.yml, because the provider does not support it.
+  source: https://documentation.handwrite.io/#send-a-letter
+pagination:
+  supported: false
+  style: none
+  note: >-
+    GET /handwriting and GET /stationery return a bare JSON ARRAY with no envelope, no cursor,
+    no limit/offset parameters and no total count. Collections are assumed small (the caller's
+    own handwriting styles and stationery). There is no list endpoint for orders at all — orders
+    are only retrievable one at a time by ID.
+  source: https://documentation.handwrite.io/#get-handwritings
+batching:
+  supported: true
+  operation: sendLetter
+  mechanism: >-
+    POST /send accepts EITHER a single order object OR an array of order objects. The response
+    shape is the same (an array of orders) in both cases.
+  limits:
+    recipients_per_order: 10
+    orders_per_request: 1000
+  partial_failure_semantics: not documented
+  note: >-
+    Handwrite does not document what happens when one element of a 1,000-order batch is
+    invalid — whether the whole request is rejected or the valid orders proceed. An agent should
+    not assume all-or-nothing.
+  source: https://documentation.handwrite.io/#send-a-letter
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+filtering_and_sorting:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    There is no customer-supplied metadata or external-reference field on an order, so a client
+    cannot tag an order with its own record id. Correlation must be done by storing Handwrite's
+    returned _id.
+request_id_tracing:
+  supported: false
+  header: null
+  note: >-
+    No X-Request-Id / correlation header is documented or was observed on the 2026-08-13 probes.
+    The origin is Express behind the Heroku router; responses carry `etag`, `via`, `nel` and
+    `report-to`, none of which are usable as a support correlation id.
+versioning:
+  style: uri-path
+  current: v1
+  base_url: https://api.handwrite.io/v1
+  header_negotiation: false
+  detail: lifecycle/handwrite-io-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  rfc9457: false
+  shape:
+    message: human-readable string
+    error: machine code (declared in spec; only rate_limit_exceeded is documented)
+  detail: errors/handwrite-io-problem-types.yml
+rate_limit_signaling:
+  limit: 60 requests per minute per API key
+  headers:
+    - X-RateLimit-Limit
+    - X-RateLimit-Remaining
+    - X-RateLimit-Reset
+  retry_after: false
+  status_on_exhaustion: 429
+  error_code: rate_limit_exceeded
+  detail: rate-limits/handwrite-io-rate-limits.yml
+identifiers:
+  style: MongoDB ObjectId
+  field: _id
+  format: 24-character hexadecimal
+  prefixed: false
+  note: >-
+    Handwriting IDs, stationery IDs and order IDs are all bare 24-hex ObjectIds with no type
+    prefix, so an identifier is not self-describing — a client cannot tell a card id from a
+    handwriting id by looking at it. Both are passed as plain strings on POST /send, which makes
+    transposing them a silent, mailable error.
+timestamps:
+  format: ISO 8601 / RFC 3339 UTC
+  fields_observed:
+    - createdAt
+  note: >-
+    The provider's documented response examples use `createdAt`, while the OpenAPI in this repo
+    models `created_at`. The provider's own payload is the authority: `createdAt`.
+naming_convention: lowerCamelCase for request/response fields; `_id` for identifiers
+webhooks:
+  supported: false
+  note: >-
+    No callbacks, no webhooks, no event subscriptions are documented anywhere. Order status
+    (processing -> written -> complete) can only be discovered by POLLING GET /order/{orderId}.
+    See asyncapi absence noted in lifecycle/ and the apis.yml x-coverage block.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,287 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/handwrite-io-handwriting-api-openapi.yml, openapi/handwrite-io-stationery-api-openapi.yml,
+  openapi/handwrite-io-send-api-openapi.yml, openapi/handwrite-io-orders-api-openapi.yml ;
+  enriched from https://documentation.handwrite.io/ response examples
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Entity-relationship graph for the Handwrite API, derived from the OpenAPI $ref graph and the
+  id-reference fields on SendRequest, then reconciled against the provider's documented response
+  examples. Four entities, one of which (Recipient) is a value object embedded twice on every
+  order rather than a first-class addressable resource.
+identifier_convention:
+  style: MongoDB ObjectId
+  format: 24-character hexadecimal string
+  field: _id
+  prefixed: false
+  domains_distinguishable: false
+  note: >-
+    Handwriting, Stationery and Order ids are indistinguishable from each other by inspection —
+    there is no type prefix. Because POST /send takes `handwriting` and `card` as bare strings,
+    swapping the two ids is a silent error that still mails a card.
+entities:
+  - name: Handwriting
+    description: A handwriting style available to the account.
+    addressable: true
+    operations:
+      list: getHandwritings
+      get: null
+    fields:
+      - name: _id
+        type: string
+        role: identifier
+      - name: name
+        type: string
+      - name: preview_url
+        type: string
+        format: uri
+        note: Handwrite serves previews from res.cloudinary.com/handwrite
+    relationships:
+      - type: has_many
+        target: Order
+        via: Order.handwriting
+        note: inverse of Order belongs_to Handwriting
+  - name: Stationery
+    description: >-
+      A card / stationery option — both the publicly available options Handwrite provides and any
+      custom stationery the account has uploaded.
+    addressable: true
+    operations:
+      list: getStationery
+      get: null
+    fields:
+      - name: _id
+        type: string
+        role: identifier
+      - name: name
+        type: string
+      - name: preview_url
+        type: string
+        format: uri
+    relationships:
+      - type: has_many
+        target: Order
+        via: Order.card
+    note: >-
+      The docs add that the chosen card id "will also determine whether it is the front or back
+      of card" — a semantic the schema does not express.
+  - name: Recipient
+    description: >-
+      A US postal address plus a name. A VALUE OBJECT, not a resource: it has no _id, cannot be
+      listed or fetched, and is embedded on every order twice (as `to` and as `from`). There is
+      no address book.
+    addressable: false
+    operations: {}
+    fields:
+      - name: firstName
+        type: string
+        required: true
+      - name: lastName
+        type: string
+        required: true
+      - name: company
+        type: string
+        required: false
+        note: >-
+          When present, company goes on the first address line with "attention to" on the second.
+      - name: street1
+        type: string
+        required: true
+      - name: street2
+        type: string
+        required: false
+      - name: city
+        type: string
+        required: true
+      - name: state
+        type: string
+        required: true
+        constraint: capitalized two-letter US abbreviation (e.g. AL, not Alabama)
+      - name: zip
+        type: string
+        required: true
+        constraint: exactly 5 characters
+    relationships:
+      - type: belongs_to
+        target: Order
+        via: Order.to
+      - type: belongs_to
+        target: Order
+        via: Order.from
+    geography_note: >-
+      The state and zip constraints make the data model US-only. No country field exists.
+  - name: SendRequest
+    description: >-
+      The write payload for POST /send. Not a persisted entity — it is transformed into one or
+      more Orders (one per recipient) and the Orders are what come back.
+    addressable: false
+    operations:
+      create: sendLetter
+    fields:
+      - name: message
+        type: string
+        required: true
+        constraint: maximum 320 characters
+      - name: handwriting
+        type: string
+        required: true
+        role: reference
+        references: Handwriting._id
+      - name: card
+        type: string
+        required: true
+        role: reference
+        references: Stationery._id
+      - name: recipients
+        type: array
+        required: true
+        constraint: 1 to 10 Recipient objects
+        items: Recipient
+      - name: from
+        type: Recipient
+        required: false
+        description: return address
+    relationships:
+      - type: belongs_to
+        target: Handwriting
+        via: handwriting
+      - type: belongs_to
+        target: Stationery
+        via: card
+      - type: has_many
+        target: Recipient
+        via: recipients
+    fan_out: >-
+      One SendRequest with N recipients produces N Order objects. In batch mode an array of
+      SendRequests is accepted, capped at 1,000 resulting orders per HTTP request.
+  - name: Order
+    description: >-
+      One card, for one recipient, in one of five fulfillment states. The only entity with a
+      lifecycle.
+    addressable: true
+    operations:
+      get: getOrder
+      list: null
+    fields:
+      - name: _id
+        type: string
+        role: identifier
+      - name: status
+        type: string
+        enum:
+          - processing
+          - written
+          - complete
+          - problem
+          - cancelled
+      - name: message
+        type: string
+      - name: handwriting
+        type: string
+        role: reference
+        references: Handwriting._id
+      - name: card
+        type: string
+        role: reference
+        references: Stationery._id
+      - name: to
+        type: Recipient
+        note: >-
+          The provider's documented response uses `to`. The OpenAPI in this repo models the same
+          field as `recipient` — a naming divergence recorded, not silently reconciled.
+      - name: from
+        type: Recipient
+      - name: createdAt
+        type: string
+        format: date-time
+        note: >-
+          Provider payloads use `createdAt`; the OpenAPI in this repo models `created_at`. The
+          provider is the authority.
+      - name: environment
+        type: string
+        enum:
+          - live
+          - test
+        note: >-
+          Present in the provider's documented GET /order response, absent from the OpenAPI in
+          this repo. Lets a client confirm whether an order was test-mode. See sandbox/.
+      - name: proofs
+        type: array
+        note: >-
+          The provider's documented response returns `proofs`, an array of
+          {job_type, image_url} where job_type is `card` or `envelope`. The OpenAPI in this repo
+          models a single `proof_url` string. The provider is the authority. Proofs are
+          available once the letter is complete.
+    relationships:
+      - type: belongs_to
+        target: Handwriting
+        via: handwriting
+      - type: belongs_to
+        target: Stationery
+        via: card
+      - type: has_one
+        target: Recipient
+        via: to
+      - type: has_one
+        target: Recipient
+        via: from
+relationships:
+  - from: Order
+    to: Handwriting
+    type: belongs_to
+    via: handwriting
+  - from: Order
+    to: Stationery
+    type: belongs_to
+    via: card
+  - from: Order
+    to: Recipient
+    type: has_one
+    via: to
+  - from: Order
+    to: Recipient
+    type: has_one
+    via: from
+  - from: SendRequest
+    to: Handwriting
+    type: belongs_to
+    via: handwriting
+  - from: SendRequest
+    to: Stationery
+    type: belongs_to
+    via: card
+  - from: SendRequest
+    to: Recipient
+    type: has_many
+    via: recipients
+  - from: Handwriting
+    to: Order
+    type: has_many
+    via: Order.handwriting
+  - from: Stationery
+    to: Order
+    type: has_many
+    via: Order.card
+spec_divergences:
+  description: >-
+    Differences between the OpenAPI in this repo and the provider's own documented payloads.
+    Recorded so a consumer trusts the right one; the provider's docs win.
+  items:
+    - field: Order.to vs Order.recipient
+      spec: recipient
+      provider: to
+    - field: Order.createdAt vs Order.created_at
+      spec: created_at
+      provider: createdAt
+    - field: Order.proofs vs Order.proof_url
+      spec: proof_url (single uri)
+      provider: proofs (array of {job_type, image_url})
+    - field: Order.environment
+      spec: absent
+      provider: present (live | test)
+render: null
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

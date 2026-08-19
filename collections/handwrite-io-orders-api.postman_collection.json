@@ -1,0 +1,245 @@
+{
+  "item": [
+    {
+      "id": "16bfebfa-a945-4497-9ea9-b042727a3499",
+      "name": "Orders",
+      "description": {
+        "content": "Order tracking and status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ea65eb3-7ff6-4a9a-81fb-7cc0361a5c17",
+          "name": "Get an Order",
+          "request": {
+            "name": "Get an Order",
+            "description": {
+              "content": "Returns an order by ID, including status and proof images.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "order",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74977d83-fa5d-43d0-9e1b-bc37bdf859a1",
+              "name": "Order object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"status\": \"problem\",\n  \"message\": \"string\",\n  \"handwriting\": \"string\",\n  \"card\": \"string\",\n  \"recipient\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"street1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"company\": \"string\",\n    \"street2\": \"string\"\n  },\n  \"from\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"street1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\",\n    \"company\": \"string\",\n    \"street2\": \"string\"\n  },\n  \"proof_url\": \"http://ReHfOrTJyDFwNVnBcENlPHkefPcYUA.aqmZR7ZnNwWd18ievLKYlZZrEub0vXswyDWS0SLReSxDUUqSY,jvd\",\n  \"created_at\": \"1999-05-21T22:01:08.708Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ececd12-48bf-42ab-8ec5-cc2de633ee8b",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed61c61d-1984-4c68-b43d-1f8f5796f4c1",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "order",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.handwrite.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48c6a86b-dc26-4e48-8aa7-0508a8e69f50",
+    "name": "Handwrite IO Handwriting Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.\n\nContact Support:\n Name: Handwrite IO",
+      "type": "text/plain"
+    }
+  }
+}

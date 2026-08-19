@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "dde3ae73-f519-41db-aa4c-6146df4f7921",
+      "name": "Send",
+      "description": {
+        "content": "Send handwritten notes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d6e5de6-45a6-4aa0-abcd-8af3d8885cf2",
+          "name": "Send a Letter",
+          "request": {
+            "name": "Send a Letter",
+            "description": {
+              "content": "Sends one or more handwritten letters. Accepts a single order or a batch (up to 1,000 individual orders per request).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb559064-78a4-48f0-adda-c24187f32221",
+              "name": "Array of order objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"status\": \"processing\",\n    \"message\": \"string\",\n    \"handwriting\": \"string\",\n    \"card\": \"string\",\n    \"recipient\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"from\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"proof_url\": \"http://AoSo.unfeE4FGHN9uc+GC4A6XeEZJcg\",\n    \"created_at\": \"1997-07-29T06:43:58.798Z\"\n  },\n  {\n    \"_id\": \"string\",\n    \"status\": \"processing\",\n    \"message\": \"string\",\n    \"handwriting\": \"string\",\n    \"card\": \"string\",\n    \"recipient\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"from\": {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    },\n    \"proof_url\": \"http://pvT.bgwrkQ+DxoAN\",\n    \"created_at\": \"1952-04-07T05:20:49.972Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a51109a-25fa-43b6-b62b-2ca9e55ed185",
+              "name": "Rate limit exceeded (60 requests per minute per API key)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"handwriting\": \"<string>\",\n  \"card\": \"<string>\",\n  \"recipients\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"street1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"company\": \"<string>\",\n      \"street2\": \"<string>\"\n    }\n  ],\n  \"from\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"street1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"company\": \"<string>\",\n    \"street2\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.handwrite.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3124d172-49d6-42a6-92ff-05b181e45648",
+    "name": "Handwrite IO Handwriting Send API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.\n\nContact Support:\n Name: Handwrite IO",
+      "type": "text/plain"
+    }
+  }
+}

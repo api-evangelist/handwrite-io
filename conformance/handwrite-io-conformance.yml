@@ -1,0 +1,110 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://documentation.handwrite.io/ ; https://www.handwrite.io/ (pricing, integrations, faq,
+  sitemap) ; live probes of api.handwrite.io on 2026-08-13 ; derived from
+  openapi/handwrite-io-*-openapi.yml
+provider: Handwrite IO
+providerId: handwrite-io
+description: >-
+  Cross-cutting standards conformance for the Handwrite API, asserted only where evidence
+  exists. Handwrite publishes no compliance program, no certifications, and no trust center;
+  every probe for one returned 404. No `Compliance` or `TrustCenter` pointer is wired into
+  apis.yml.
+standards:
+  - id: openapi
+    name: OpenAPI 3.x
+    conforms: false
+    provider_published: false
+    evidence: >-
+      No OpenAPI is served by Handwrite. Probed /openapi.json, /openapi.yaml, /swagger.json,
+      /v1/openapi.json and /api-docs on api.handwrite.io (JSON 404 on all), handwrite.io,
+      www.handwrite.io and documentation.handwrite.io (HTML 404 on all). The OpenAPI in this
+      repo's openapi/ directory is an API Evangelist derivation from the provider's published
+      Slate documentation, not a provider artifact.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are a plain JSON object with a `message` string; media type is
+      application/json, not application/problem+json. No type/title/status/detail/instance
+      members. See errors/handwrite-io-problem-types.yml.
+  - id: rate-limit-headers
+    name: X-RateLimit-* de facto rate-limit headers
+    conforms: true
+    evidence: >-
+      X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset were observed on a live
+      unauthenticated request to https://api.handwrite.io/v1/handwriting on 2026-08-13. These
+      are the legacy de facto headers, not a standard.
+  - id: rfc9331
+    name: RFC 9331 / IETF RateLimit header fields
+    conforms: false
+    evidence: >-
+      No `RateLimit` or `RateLimit-Policy` header, and no `Retry-After` on 429. Only the
+      X-RateLimit-* trio is emitted.
+  - id: idempotency
+    name: Idempotency keys for unsafe requests (draft-ietf-httpapi-idempotency-key-header)
+    conforms: false
+    evidence: >-
+      No idempotency key is documented or accepted. Material because POST /send has a physical,
+      non-reversible effect. See conventions/handwrite-io-conventions.yml.
+  - id: pagination
+    name: Collection pagination
+    conforms: false
+    evidence: >-
+      GET /handwriting and GET /stationery return bare JSON arrays with no cursor, limit, offset
+      or total. No list endpoint exists for orders.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: >-
+      Authentication is a static API key in the Authorization header with no scheme prefix.
+      /.well-known/oauth-authorization-server returned 404 on all four hosts.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: /.well-known/openid-configuration returned 404 on all four hosts.
+  - id: rfc9116
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt returned 404 on all four hosts. See
+      well-known/handwrite-io-well-known.yml.
+  - id: rfc8594
+    name: RFC 8594 Sunset header / deprecation signalling
+    conforms: false
+    evidence: No Sunset or Deprecation header observed; no deprecation policy published.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    applicable: false
+    evidence: >-
+      Handwrite has no event, streaming or webhook surface at all — order status is discovered
+      only by polling GET /order/{orderId}. Not penalised; there is nothing to describe.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: false
+    evidence: >-
+      No hosted MCP server and no MCP package. Searched the docs, the handwriteio GitHub org and
+      npm; nothing found.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json returned 404 on all four hosts.
+compliance_programs:
+  published: false
+  certifications: []
+  trust_center: null
+  evidence: >-
+    Probed https://www.handwrite.io/security (404), /privacy-policy (404), /terms (404),
+    /terms-of-service (404), /legal (404), and app.handwrite.io/terms and /privacy (both 404).
+    The site sitemap lists 15 URLs and contains no legal, security or compliance page. No SOC 2,
+    ISO 27001, PCI, HIPAA or GDPR claim appears anywhere on a Handwrite domain.
+  note: >-
+    Worth flagging to the provider: Handwrite ingests recipient names and postal addresses
+    through POST /send — personal data — and publishes no privacy policy or terms of service at
+    all. That is a discoverability and trust gap, not just a scoring one.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
