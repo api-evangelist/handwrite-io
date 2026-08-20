@@ -77,6 +77,8 @@ apis:
   humanURL: https://documentation.handwrite.io/#get-an-order
   baseURL: https://api.handwrite.io/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
