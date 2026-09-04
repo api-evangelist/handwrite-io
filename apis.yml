@@ -28,23 +28,20 @@ deliveryModel:
   method: derived
 accessModel:
   pricing: paid
-  onboarding: self-serve
+  onboarding: unknown
   trial: false
-  try_now: true
+  try_now: false
   public: false
-  label: Paid per card · Self-serve signup · Unbilled test mode
+  label: Paid
   confidence: high
   source:
   - plans
   - authentication
+  - rate-limits
+  - security
   - sandbox
-  generated: '2026-08-13'
+  generated: '2026-09-03'
   method: derived
-  note: >-
-    Corrected from `freemium` on 2026-08-13. The site CTA reads "START FOR FREE", but that is
-    free account creation — every mailed card is billed, and Handwrite publishes no free card
-    allowance. The free-feeling surface is test mode (test_hw keys), which exercises the API
-    without billing and without mailing anything.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/handwrite-io.png
 tags:
   - Direct Mail
