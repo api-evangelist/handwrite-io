@@ -1,10 +1,7 @@
 {
   "provider": "handwrite-io",
   "sources": [
-    "handwrite-io-handwriting-api-openapi.yml",
-    "handwrite-io-orders-api-openapi.yml",
-    "handwrite-io-send-api-openapi.yml",
-    "handwrite-io-stationery-api-openapi.yml"
+    "_original/handwrite-io-openapi.yml"
   ],
   "outputs": [
     "handwrite-io-handwriting-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "handwrite-io-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "handwrite-io-handwriting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handwrite-io-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handwrite-io-send-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "handwrite-io-stationery-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

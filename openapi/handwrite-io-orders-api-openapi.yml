@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Handwrite IO Handwriting Orders API
+  title: Handwrite IO Orders API
   description: The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.
   version: 1.0.0
   contact:
@@ -41,31 +41,12 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Recipient:
+    Error:
       type: object
-      required:
-      - firstName
-      - lastName
-      - street1
-      - city
-      - state
-      - zip
       properties:
-        firstName:
+        error:
           type: string
-        lastName:
-          type: string
-        company:
-          type: string
-        street1:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
+        message:
           type: string
     Order:
       type: object
@@ -96,12 +77,31 @@ components:
         created_at:
           type: string
           format: date-time
-    Error:
+    Recipient:
       type: object
+      required:
+      - firstName
+      - lastName
+      - street1
+      - city
+      - state
+      - zip
       properties:
-        error:
+        firstName:
           type: string
-        message:
+        lastName:
+          type: string
+        company:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
           type: string
   responses:
     RateLimited:

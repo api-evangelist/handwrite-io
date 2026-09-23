@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Handwrite IO Handwriting Send API
+  title: Handwrite IO Send API
   description: The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications at scale.
   version: 1.0.0
   contact:
@@ -44,6 +44,13 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (60 requests per minute per API key)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -52,6 +59,35 @@ components:
           type: string
         message:
           type: string
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        status:
+          type: string
+          enum:
+          - processing
+          - written
+          - complete
+          - problem
+          - cancelled
+        message:
+          type: string
+        handwriting:
+          type: string
+        card:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        from:
+          $ref: '#/components/schemas/Recipient'
+        proof_url:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
     SendRequest:
       type: object
       required:
@@ -103,42 +139,6 @@ components:
           type: string
         zip:
           type: string
-    Order:
-      type: object
-      properties:
-        _id:
-          type: string
-        status:
-          type: string
-          enum:
-          - processing
-          - written
-          - complete
-          - problem
-          - cancelled
-        message:
-          type: string
-        handwriting:
-          type: string
-        card:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        from:
-          $ref: '#/components/schemas/Recipient'
-        proof_url:
-          type: string
-          format: uri
-        created_at:
-          type: string
-          format: date-time
-  responses:
-    RateLimited:
-      description: Rate limit exceeded (60 requests per minute per API key)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
