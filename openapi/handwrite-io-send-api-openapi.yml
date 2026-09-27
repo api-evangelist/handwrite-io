@@ -52,13 +52,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Order:
       type: object
       properties:
@@ -113,6 +106,13 @@ components:
           maxItems: 10
           items:
             $ref: '#/components/schemas/Recipient'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Recipient:
       type: object
       required:
