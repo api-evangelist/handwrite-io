@@ -45,31 +45,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    SendRequest:
-      type: object
-      required:
-      - message
-      - handwriting
-      - card
-      - recipients
-      properties:
-        message:
-          type: string
-          maxLength: 320
-        handwriting:
-          type: string
-          description: Handwriting ID
-        card:
-          type: string
-          description: Stationery card ID
-        from:
-          $ref: '#/components/schemas/Recipient'
-        recipients:
-          type: array
-          minItems: 1
-          maxItems: 10
-          items:
-            $ref: '#/components/schemas/Recipient'
     Error:
       type: object
       properties:
@@ -132,6 +107,31 @@ components:
           type: string
         zip:
           type: string
+    SendRequest:
+      type: object
+      required:
+      - message
+      - handwriting
+      - card
+      - recipients
+      properties:
+        message:
+          type: string
+          maxLength: 320
+        handwriting:
+          type: string
+          description: Handwriting ID
+        card:
+          type: string
+          description: Stationery card ID
+        from:
+          $ref: '#/components/schemas/Recipient'
+        recipients:
+          type: array
+          minItems: 1
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Recipient'
   responses:
     RateLimited:
       description: Rate limit exceeded (60 requests per minute per API key)

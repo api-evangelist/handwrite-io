@@ -40,14 +40,36 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Rate limit exceeded (60 requests per minute per API key)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        status:
+          type: string
+          enum:
+          - processing
+          - written
+          - complete
+          - problem
+          - cancelled
+        message:
+          type: string
+        handwriting:
+          type: string
+        card:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        from:
+          $ref: '#/components/schemas/Recipient'
+        proof_url:
+          type: string
+          format: uri
+        created_at:
+          type: string
+          format: date-time
     Error:
       type: object
       properties:
@@ -81,35 +103,13 @@ components:
           type: string
         zip:
           type: string
-    Order:
-      type: object
-      properties:
-        _id:
-          type: string
-        status:
-          type: string
-          enum:
-          - processing
-          - written
-          - complete
-          - problem
-          - cancelled
-        message:
-          type: string
-        handwriting:
-          type: string
-        card:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        from:
-          $ref: '#/components/schemas/Recipient'
-        proof_url:
-          type: string
-          format: uri
-        created_at:
-          type: string
-          format: date-time
+  responses:
+    RateLimited:
+      description: Rate limit exceeded (60 requests per minute per API key)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
