@@ -176,3 +176,50 @@ not_published:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: 1 - 99 cards
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
+  - name: 100 - 249 cards
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
+  - name: 250 - 499 cards
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
+  - name: 500 - 999 cards
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
+  - name: 1000+ cards
+    access: enterprise
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
