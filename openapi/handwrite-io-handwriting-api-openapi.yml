@@ -35,6 +35,13 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Handwriting:
       type: object
       properties:
@@ -45,13 +52,6 @@ components:
         preview_url:
           type: string
           format: uri
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   responses:
     RateLimited:
       description: Rate limit exceeded (60 requests per minute per API key)
