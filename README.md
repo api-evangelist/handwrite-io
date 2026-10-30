@@ -1,4 +1,4 @@
-# Handwrite IO (handwrite-io)
+# Handwrite IO
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,57 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Handwrite IO provides a REST API that lets you send handwritten notes in an automated manner. Using the API, businesses can send personalized handwritten cards and notes at scale through REST endpoints.
+Handwrite is a South Carolina based direct-mail service that writes and mails real handwritten cards on demand, and exposes that fulfillment as a small REST API at https://api.handwrite.io/v1. Four operations cover the whole surface: list the handwriting styles on the account, list the stationery and card options, send a card to between one and ten US recipients (or up to 1,000 orders in a single batch request), and fetch an order to follow it from processing through written to complete and retrieve proof images of the finished card and envelope. Authentication is a single static API key sent raw in the Authorization header, prefixed test_hw for unbilled test-mode calls or live_hw for calls that actually mail and bill. Pricing is per mailed card rather than per API call, from $2.99 down to $2.45 by volume, with the card, envelope, handwriting and postage included. The API is rate limited to 60 requests per minute per key. Handwrite also ships a Zapier integration for teams that do not want to write code.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/apis.yml)
+**Areas:** Direct Mail · Handwritten · Handwritten Notes · Cards · Marketing · Notes · Print · Fulfillment · Customer Engagement
 
-## Scope
+## Handwrite IO on APIs.io
 
-- **Type:** Index
+Everything profiled for Handwrite IO is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/handwrite-io/](https://apis.io/providers/handwrite-io/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Direct Mail
-- Handwritten
-- Marketing
-- Notes
+- [Handwrite IO Handwriting API](https://apis.io/apis/handwrite-io/handwrite-io-handwriting-api/) — Available handwriting styles
+- [Handwrite IO Orders API](https://apis.io/apis/handwrite-io/handwrite-io-orders-api/) — Order tracking and status
+- [Handwrite IO Send API](https://apis.io/apis/handwrite-io/handwrite-io-send-api/) — Send handwritten notes
+- [Handwrite IO Stationery API](https://apis.io/apis/handwrite-io/handwrite-io-stationery-api/) — Available stationery and cards
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-14
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Handwrite IO API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Handwrite API allows you to send handwritten notes in an automated manner using REST endpoints. Integrate personalized handwritten correspondence into your workflows and applications.
+- [Handwrite Io Agentic Access](https://apis.io/agentic-access/handwrite-io/handwrite-io-agentic-access/)
 
-- **Human URL:** [https://documentation.handwrite.io/#introduction](https://documentation.handwrite.io/#introduction)
-- **Base URL:** `https://api.handwrite.io/v1`
+#### Collections (5)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Handwritten
-- Notes
+- [Handwrite IO API](https://apis.io/collections/handwrite-io/open-handwrite-io/)
+- [Handwrite IO Handwriting API](https://apis.io/collections/handwrite-io/open-handwrite-io-handwriting-api/)
+- [Handwrite IO Handwriting Orders API](https://apis.io/collections/handwrite-io/open-handwrite-io-orders-api/)
+- [Handwrite IO Handwriting Send API](https://apis.io/collections/handwrite-io/open-handwrite-io-send-api/)
+- [Handwrite IO Handwriting Stationery API](https://apis.io/collections/handwrite-io/open-handwrite-io-stationery-api/)
 
-#### Properties
+#### Overlays (4)
 
-- [Documentation](https://documentation.handwrite.io/#introduction)
-- [Authentication](https://documentation.handwrite.io/#authentication)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/openapi/handwrite-io-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Rules](https://raw.githubusercontent.com/api-evangelist/handwrite-io/refs/heads/main/rules/handwrite-io-rules.yml)
-- [Postman Collection](collections/handwrite-io.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/handwrite-io.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+OpenAPI overlays, including conversational phrasing for each operation.
 
-## Common Properties
+- [Handwrite Io Handwriting Api Overlay](https://apis.io/overlays/handwrite-io/handwrite-io-handwriting-api-overlay/)
+- [Handwrite Io Orders Api Overlay](https://apis.io/overlays/handwrite-io/handwrite-io-orders-api-overlay/)
+- [Handwrite Io Send Api Overlay](https://apis.io/overlays/handwrite-io/handwrite-io-send-api-overlay/)
+- [Handwrite Io Stationery Api Overlay](https://apis.io/overlays/handwrite-io/handwrite-io-stationery-api-overlay/)
 
-- [LinkedIn](https://www.linkedin.com/company/handwrite)
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Handwrite IO API Rules](https://apis.io/rules/handwrite-io/handwrite-io-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Handwrite Io Authentication](https://apis.io/security/handwrite-io/handwrite-io-authentication/)
+- [Handwrite Io Domain Security](https://apis.io/security/handwrite-io/handwrite-io-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Handwrite Io Plans Pricing](https://apis.io/plans/handwrite-io/handwrite-io-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Handwrite Io Rate Limits](https://apis.io/rate-limits/handwrite-io/handwrite-io-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Handwrite Io Finops](https://apis.io/finops/handwrite-io/handwrite-io-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://handwrite.io/)
 - [Documentation](https://documentation.handwrite.io/)
-- [Integrations](https://www.handwrite.io/integrations)
+- [Getting started](https://documentation.handwrite.io/#getting-started)
+- [API reference](https://documentation.handwrite.io/#endpoints)
+- [Pricing](https://www.handwrite.io/pricing)
+- [Sign up](https://app.handwrite.io/signup)
+- [Support](https://www.handwrite.io/contact-us)
+- [Blog](https://www.handwrite.io/blog)
+- [GitHub](https://github.com/handwriteio)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 45.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.2 |
+| Contract governance | 22.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 55.3 |
+
+**Agent readiness 22.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/handwrite-io/](https://apis.io/providers/handwrite-io/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Handwrite IO: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/handwrite-io/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
