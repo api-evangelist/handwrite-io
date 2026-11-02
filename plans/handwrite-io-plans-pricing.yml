@@ -1,0 +1,100 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.handwrite.io/pricing
+sources:
+- https://www.handwrite.io/pricing
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T161713
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: Volume-tiered per-card pricing; custom and monthly plans available via contacting the team.
+plan_count: 5
+currency: USD
+plans:
+- name: 1 - 99 cards
+  price_text: $2.99
+  price: 2.99
+  currency: USD
+  period: per-use
+  unit: per card
+  included_quota: the card, envelope, writing, and postage
+- name: 100 - 249 cards
+  price_text: $2.75
+  price: 2.75
+  currency: USD
+  period: per-use
+  unit: per card
+  included_quota: the card, envelope, writing, and postage
+- name: 250 - 499 cards
+  price_text: $2.60
+  price: 2.6
+  currency: USD
+  period: per-use
+  unit: per card
+  included_quota: the card, envelope, writing, and postage
+- name: 500 - 999 cards
+  price_text: $2.45
+  price: 2.45
+  currency: USD
+  period: per-use
+  unit: per card
+  included_quota: the card, envelope, writing, and postage
+- name: 1000 +
+  price_text: Contact Us
+  period: none
+  unit: per card
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: 1 - 99 cards
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: 100 - 249 cards
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: 250 - 499 cards
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: 500 - 999 cards
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: 1000 +
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - other
+    periods:
+    - none
